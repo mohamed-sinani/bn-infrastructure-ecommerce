@@ -11,7 +11,7 @@ $message = '';
 if ($action === 'update_status' && $id && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'] ?? '';
     $note = trim($_POST['note'] ?? '');
-    $allowed = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+    $allowed = ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'];
     if (in_array($status, $allowed)) {
         execute("UPDATE orders SET status = ? WHERE id = ?", [$status, $id]);
         execute("INSERT INTO order_tracking (order_id, status, note) VALUES (?, ?, ?)", [$id, $status, $note ?: 'Status updated to ' . $status]);
@@ -166,6 +166,7 @@ tr:hover td{background:rgba(240,90,34,0.02)}
           <label style="display:block;font-size:11px;font-weight:600;color:#888;margin-bottom:4px;">New Status</label>
           <select id="statusSelect" style="padding:8px 12px;border:1.5px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;" onchange="document.getElementById('statusVal').value=this.value">
             <option value="">Select...</option>
+            <option value="confirmed">Confirmed</option>
             <option value="processing">Processing</option>
             <option value="shipped">Shipped</option>
             <option value="delivered">Delivered</option>
@@ -192,6 +193,7 @@ tr:hover td{background:rgba(240,90,34,0.02)}
       <select name="status">
         <option value="">All Statuses</option>
         <option value="pending" <?php echo $statusFilter === 'pending' ? 'selected' : ''; ?>>Pending</option>
+        <option value="confirmed" <?php echo $statusFilter === 'confirmed' ? 'selected' : ''; ?>>Confirmed</option>
         <option value="processing" <?php echo $statusFilter === 'processing' ? 'selected' : ''; ?>>Processing</option>
         <option value="shipped" <?php echo $statusFilter === 'shipped' ? 'selected' : ''; ?>>Shipped</option>
         <option value="delivered" <?php echo $statusFilter === 'delivered' ? 'selected' : ''; ?>>Delivered</option>

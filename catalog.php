@@ -12,6 +12,7 @@ $brandFilter = $_GET['brand'] ?? '';
 $stockFilter = $_GET['in_stock'] ?? '';
 $sort = $_GET['sort'] ?? 'best';
 $search = $_GET['search'] ?? '';
+$specFilter = $_GET['spec'] ?? '';
 $minPrice = $_GET['min_price'] ? (float)$_GET['min_price'] : 0;
 $maxPrice = $_GET['max_price'] ? (float)$_GET['max_price'] : 999999999;
 
@@ -45,6 +46,10 @@ if ($minPrice > 0) {
 if ($maxPrice < 999999999) {
     $where[] = "p.price <= ?";
     $params[] = $maxPrice;
+}
+if ($specFilter) {
+    $where[] = "p.specs LIKE ?";
+    $params[] = "%$specFilter%";
 }
 
 $whereClause = $where ? 'WHERE ' . implode(' AND ', $where) : '';
@@ -88,6 +93,7 @@ $activeChips = [];
 if ($categoryFilter && $selectedCatName) $activeChips[] = ['label' => $selectedCatName, 'param' => 'category'];
 if ($brandFilter) $activeChips[] = ['label' => htmlspecialchars($brandFilter), 'param' => 'brand'];
 if ($stockFilter === '1') $activeChips[] = ['label' => 'In Stock', 'param' => 'in_stock'];
+if ($specFilter) $activeChips[] = ['label' => 'Spec: ' . htmlspecialchars($specFilter), 'param' => 'spec'];
 $hasActiveFilters = !empty($activeChips) || $minPrice > 0 || $maxPrice < 999999999;
 $cartProductIds = array_keys(cartGetItems());
 ?>
@@ -411,6 +417,57 @@ $cartProductIds = array_keys(cartGetItems());
                   <span class="dropdown-option-label"><?php echo htmlspecialchars($b['brand']); ?></span>
                 </label>
                 <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-dropdown-wrap" id="specWrap">
+            <button type="button" class="filter-dropdown-btn <?php echo $specFilter ? 'active-filter' : ''; ?>" id="specBtn" onclick="toggleDropdown('specPanel', 'specBtn')">
+              <i class="fas fa-microchip icon-left"></i>
+              Specs
+              <?php if ($specFilter): ?><span class="filter-badge-count">1</span><?php endif; ?>
+              <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="filter-dropdown-panel" id="specPanel">
+              <div class="dropdown-option-list">
+                <label class="dropdown-option">
+                  <input type="radio" name="spec" value="" <?php echo !$specFilter ? 'checked' : ''; ?> onchange="this.form.submit()">
+                  <span class="custom-checkbox"></span>
+                  <span class="dropdown-option-label">All Specs</span>
+                </label>
+                <?php
+                $specOptions = [
+                    'PoE' => 'PoE (Power over Ethernet)',
+                    'WiFi 6' => 'WiFi 6 / 802.11ax',
+                    'WiFi 5' => 'WiFi 5 / 802.11ac',
+                    '10GbE' => '10 Gigabit Ethernet',
+                    '2.5GbE' => '2.5 Gigabit Ethernet',
+                    '1GbE' => '1 Gigabit Ethernet',
+                    '10G' => '10G SFP+',
+                    '24-port' => '24 Ports',
+                    '48-port' => '48 Ports',
+                    '8-port' => '8 Ports',
+                    'Managed' => 'Managed Switch',
+                    'Unmanaged' => 'Unmanaged Switch',
+                    'Layer 3' => 'Layer 3 Routing',
+                    'Layer 2' => 'Layer 2 Switching',
+                    'UbiOS' => 'Ubiquiti UniFi',
+                    'RouterOS' => 'MikroTik RouterOS',
+                    'FortiOS' => 'Fortinet FortiOS',
+                    'CAPWAP' => 'CAPWAP / Cloud Managed',
+                    '802.1X' => '802.1X Authentication',
+                    'VPN' => 'VPN Support',
+                ];
+                foreach ($specOptions as $val => $label): ?>
+                <label class="dropdown-option">
+                  <input type="radio" name="spec" value="<?php echo $val; ?>" <?php echo $specFilter === $val ? 'checked' : ''; ?> onchange="this.form.submit()">
+                  <span class="custom-checkbox"></span>
+                  <span class="dropdown-option-label"><?php echo $label; ?></span>
+                </label>
+                <?php endforeach; ?>
+              </div>
+              <div style="padding:10px 14px;border-top:1px solid var(--border);">
+                <input type="text" name="spec" value="<?php echo htmlspecialchars($specFilter); ?>" placeholder="Or type custom spec..." style="width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:6px;font-size:12px;font-family:'Inter',sans-serif;" onkeypress="if(event.key==='Enter'){this.form.submit();}">
               </div>
             </div>
           </div>

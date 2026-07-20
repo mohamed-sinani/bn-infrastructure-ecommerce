@@ -77,13 +77,15 @@ tr:hover td{background:rgba(240,90,34,0.02)}
 <body>
 <div class="sidebar">
   <h2><i class="fas fa-cube"></i><span>Admin</span></h2>
-  <a href="index.php"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+  <a href="index.php"><i class="fas fa-th-large"></i> <span>Dashboard</span></a>
   <a href="products.php"><i class="fas fa-box"></i> <span>Products</span></a>
-  <a href="orders.php"><i class="fas fa-truck"></i> <span>Orders</span></a>
+  <a href="products-add.php"><i class="fas fa-plus-circle"></i> <span>Add Product</span></a>
+  <a href="categories.php"><i class="fas fa-tags"></i> <span>Categories</span></a>
+  <a href="orders.php"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
+  <a href="payments.php"><i class="fas fa-credit-card"></i> <span>Payments</span></a>
   <a href="quotes.php"><i class="fas fa-file-alt"></i> <span>Quotes</span></a>
   <a href="customers.php" class="active"><i class="fas fa-users"></i> <span>Customers</span></a>
-  <a href="payments.php"><i class="fas fa-credit-card"></i> <span>Payments</span></a>
-  <a href="categories.php"><i class="fas fa-tags"></i> <span>Categories</span></a>
+  <a href="company-users.php"><i class="fas fa-user-shield"></i> <span>Authorized Users</span></a>
   <a href="reports.php"><i class="fas fa-chart-bar"></i> <span>Reports</span></a>
   <a href="login.php?action=logout" style="margin-top:40px;"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
 </div>

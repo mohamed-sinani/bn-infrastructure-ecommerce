@@ -193,6 +193,45 @@ footer{background:var(--navy-dark);padding:48px 48px 0;margin-top:48px}.footer-i
           </div>
         <?php endif; ?>
       </div>
+
+<?php
+$quotes = fetchAll("SELECT * FROM quotations WHERE user_id = ? ORDER BY created_at DESC", [$user_id]);
+if (!empty($quotes)):
+?>
+<div class="orders-card reveal" style="transition-delay: 0.2s;">
+  <div class="card-header">
+    <i class="fas fa-file-alt"></i><h3>Quote Requests</h3>
+  </div>
+  <table class="orders-table">
+    <thead><tr>
+      <th>Quote #</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Total</th>
+    </tr></thead>
+    <tbody>
+    <?php foreach ($quotes as $q): ?>
+      <tr>
+        <td><?php echo htmlspecialchars($q['quotation_number']); ?></td>
+        <td><?php echo date('M d, Y', strtotime($q['created_at'])); ?></td>
+        <td>
+          <?php
+          $statusColors = ['pending'=>'#d97706','reviewed'=>'#2563eb','approved'=>'#059669','rejected'=>'#dc2626','converted'=>'#0A2540'];
+          $color = $statusColors[$q['status']] ?? '#888';
+          ?>
+          <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;background:<?php echo $color; ?>15;color:<?php echo $color; ?>;">
+            <span style="width:6px;height:6px;border-radius:50%;background:<?php echo $color; ?>;"></span>
+            <?php echo ucfirst($q['status']); ?>
+          </span>
+        </td>
+        <td style="font-weight:600;">TSh <?php echo number_format($q['total'], 0, '.', ','); ?></td>
+      </tr>
+    <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
+<?php endif; ?>
+
     </div>
   </div>
 </div>

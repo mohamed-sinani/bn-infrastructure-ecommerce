@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $branches = (int)($_POST['branches'] ?? 1);
     $budget = (float)($_POST['budget'] ?? 5000000);
     $needs = $_POST['needs'] ?? [];
+    $bandwidth = $_POST['bandwidth'] ?? 'medium';
 
     $categories = [];
     if (in_array('routing', $needs) || $branches > 1) $categories[] = 'Routers';
@@ -23,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (in_array('security', $needs)) $categories[] = 'Firewalls';
     if ($users > 50 || $departments > 5) $categories[] = 'Servers';
     if (in_array('cabling', $needs)) $categories[] = 'Cables & Accessories';
+    if ($bandwidth === 'high' || $bandwidth === 'very_high') {
+        if (!in_array('Switches', $categories)) $categories[] = 'Switches';
+        if (!in_array('Routers', $categories)) $categories[] = 'Routers';
+    }
     if (empty($categories)) $categories = ['Switches', 'Routers', 'Wireless Access Points'];
 
     $placeholders = implode(',', array_fill(0, count($categories), '?'));
@@ -141,10 +146,22 @@ footer{background:var(--navy-dark);padding:48px 48px 0;margin-top:48px}
           <input type="number" name="branches" value="1" min="1" max="50">
         </div>
       </div>
-      <div class="form-group">
-        <label>Estimated Budget (TSh) <span class="req">*</span></label>
-        <input type="number" name="budget" value="5000000" min="100000" step="100000" required>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Your total equipment budget in Tanzanian Shillings</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Estimated Budget (TSh) <span class="req">*</span></label>
+          <input type="number" name="budget" value="5000000" min="100000" step="100000" required>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Your total equipment budget in Tanzanian Shillings</div>
+        </div>
+        <div class="form-group">
+          <label>Expected Bandwidth Requirement</label>
+          <select name="bandwidth">
+            <option value="low">Low (&lt; 100 Mbps)</option>
+            <option value="medium" selected>Medium (100 Mbps – 1 Gbps)</option>
+            <option value="high">High (1 Gbps – 10 Gbps)</option>
+            <option value="very_high">Very High (&gt; 10 Gbps)</option>
+          </select>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Typical throughput needed for your organization</div>
+        </div>
       </div>
     </div>
 

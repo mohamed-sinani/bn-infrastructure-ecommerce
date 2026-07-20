@@ -70,9 +70,13 @@ if ($action === 'submit_quote') {
             }
         }
         $uid = $_SESSION['user_id'] ?? null;
+        $companyName = trim($_POST['company_name'] ?? '');
+        $contactName = trim($_POST['contact_name'] ?? '');
+        $contactEmail = trim($_POST['contact_email'] ?? '');
+        $contactPhone = trim($_POST['contact_phone'] ?? '');
         execute(
-            "INSERT INTO quotations (quotation_number, user_id, notes, lpo_file, subtotal, discount, vat, total, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')",
-            [$qnum, $uid, $notes, $lpoFile, $subtotal, $discount, $vat, $total]
+            "INSERT INTO quotations (quotation_number, user_id, company_name, contact_name, contact_email, contact_phone, notes, lpo_file, subtotal, discount, vat, total, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')",
+            [$qnum, $uid, $companyName, $contactName, $contactEmail, $contactPhone, $notes, $lpoFile, $subtotal, $discount, $vat, $total]
         );
         $qid = execute("SELECT LAST_INSERT_ID() as id", []);
         $qid = fetchOne("SELECT MAX(id) as id FROM quotations")['id'];
@@ -83,7 +87,8 @@ if ($action === 'submit_quote') {
             );
         }
         cartClear();
-        $quoteSuccess = $qnum;
+        header('Location: quote-confirmation.php?quote=' . urlencode($qnum));
+        exit;
     }
 }
 
@@ -418,6 +423,26 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-primar
         <form method="POST" enctype="multipart/form-data">
           <input type="hidden" name="action" value="submit_quote">
           <div class="quote-body">
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+              <div class="form-group">
+                <label class="form-label"><i class="fas fa-building"></i> Company Name <span style="color:var(--orange);">*</span></label>
+                <input type="text" name="company_name" class="form-textarea" style="min-height:auto;padding:10px 14px;" placeholder="e.g. Acme Communications Ltd" value="<?php echo htmlspecialchars($_POST['company_name'] ?? ''); ?>" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fas fa-user"></i> Contact Name <span style="color:var(--orange);">*</span></label>
+                <input type="text" name="contact_name" class="form-textarea" style="min-height:auto;padding:10px 14px;" placeholder="e.g. John Mwangi" value="<?php echo htmlspecialchars($_POST['contact_name'] ?? ''); ?>" required>
+              </div>
+            </div>
+            <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+              <div class="form-group">
+                <label class="form-label"><i class="fas fa-envelope"></i> Email <span style="color:var(--orange);">*</span></label>
+                <input type="email" name="contact_email" class="form-textarea" style="min-height:auto;padding:10px 14px;" placeholder="procurement@company.co.tz" value="<?php echo htmlspecialchars($_POST['contact_email'] ?? ''); ?>" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fas fa-phone"></i> Phone <span style="color:var(--orange);">*</span></label>
+                <input type="tel" name="contact_phone" class="form-textarea" style="min-height:auto;padding:10px 14px;" placeholder="+255 712 345 678" value="<?php echo htmlspecialchars($_POST['contact_phone'] ?? ''); ?>" required>
+              </div>
+            </div>
             <div class="form-group">
               <label class="form-label"><i class="fas fa-comment-alt"></i> Notes &amp; Custom Requirements</label>
               <div class="form-hint">Delivery location, installation needs, bulk requirements, payment terms, etc.</div>
