@@ -38,24 +38,25 @@ $reviewSuccess = '';
 $reviewError = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'review') {
-    if (!isLoggedIn()) {
-        $reviewError = 'Please sign in to leave a review.';
-    } else {
-        $rating = max(1, min(5, (int)($_POST['rating'] ?? 5)));
-        $title = trim($_POST['review_title'] ?? '');
-        $comment = trim($_POST['review_comment'] ?? '');
-        $reviewerName = currentUserName();
-        $userId = (int)($_SESSION['user_id'] ?? $_SESSION['admin_id'] ?? 0);
+    $rating = max(1, min(5, (int)($_POST['rating'] ?? 5)));
+    $title = trim($_POST['review_title'] ?? '');
+    $comment = trim($_POST['review_comment'] ?? '');
+    $reviewerName = trim($_POST['reviewer_name'] ?? '');
+    $userId = (int)($_SESSION['user_id'] ?? $_SESSION['admin_id'] ?? 0);
 
-        if (empty($comment)) {
-            $reviewError = 'Please write a review comment.';
-        } else {
-            execute(
-                "INSERT INTO reviews (product_id, user_id, rating, title, comment, reviewer_name, reviewer_location) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                [$product['id'], $userId ?: null, $rating, $title ?: null, $comment, $reviewerName, 'Tanzania']
-            );
-            $reviewSuccess = 'Your review has been submitted. Thank you for your feedback!';
+    if (!$userId && empty($reviewerName)) {
+        $reviewError = 'Please enter your name to submit a review.';
+    } elseif (empty($comment)) {
+        $reviewError = 'Please write a review comment.';
+    } else {
+        if ($userId && empty($reviewerName)) {
+            $reviewerName = currentUserName();
         }
+        execute(
+            "INSERT INTO reviews (product_id, user_id, rating, title, comment, reviewer_name, reviewer_location) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [$product['id'], $userId ?: null, $rating, $title ?: null, $comment, $reviewerName, 'Tanzania']
+        );
+        $reviewSuccess = 'Your review has been submitted. Thank you for your feedback!';
     }
 }
 
@@ -756,7 +757,6 @@ if (empty($allImages)) $allImages[] = '';
 
           <div>
             <!-- Write a Review -->
-            <?php if (isLoggedIn()): ?>
             <div class="review-form-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px;">
               <h4 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:16px;"><i class="fas fa-pen" style="color:var(--orange);margin-right:8px;"></i>Write a Review</h4>
               <?php if ($reviewSuccess): ?>
@@ -767,6 +767,12 @@ if (empty($allImages)) $allImages[] = '';
               <?php endif; ?>
               <form method="POST" action="">
                 <input type="hidden" name="action" value="review">
+                <?php if (!isLoggedIn()): ?>
+                <div class="form-group">
+                  <label style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block;">Your Name <span style="color:var(--orange);">*</span></label>
+                  <input type="text" name="reviewer_name" required placeholder="Enter your name" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .2s;">
+                </div>
+                <?php endif; ?>
                 <div class="form-group">
                   <label style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;display:block;">Rating <span style="color:var(--orange);">*</span></label>
                   <div id="starRating" style="display:flex;gap:4px;font-size:24px;cursor:pointer;">
@@ -789,14 +795,6 @@ if (empty($allImages)) $allImages[] = '';
                 </button>
               </form>
             </div>
-            <?php else: ?>
-            <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:24px;text-align:center;">
-              <p style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;">Sign in to leave a review for this product.</p>
-              <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" style="display:inline-flex;align-items:center;gap:6px;background:var(--orange);color:#fff;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s;">
-                <i class="fas fa-sign-in-alt"></i> Sign In to Review
-              </a>
-            </div>
-            <?php endif; ?>
 
             <div class="review-list">
               <?php if (!empty($reviews)): ?>

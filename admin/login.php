@@ -195,7 +195,7 @@ if (isLoggedIn()) {
                 </div>
                 <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Sign In to Dashboard</button>
             </form>
-            <a href="/Homepage/index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Storefront</a>
+            <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Storefront</a>
         </div>
     </div>
 </body>
