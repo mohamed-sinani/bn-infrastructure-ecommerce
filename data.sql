@@ -1,5 +1,5 @@
--- BN-Infrastructure Database Schema
--- Run: /opt/lampp/bin/mysql -u root bn_infrastructure_db < data.sql
+# BN-Infrastructure Database Schema
+# Run: /opt/lampp/bin/mysql -u root bn_infrastructure_db < data.sql
 
 CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
@@ -213,3 +213,37 @@ CREATE TABLE IF NOT EXISTS reviews (
     CONSTRAINT FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Categories
+INSERT IGNORE INTO categories (id, name, slug, description) VALUES
+(1, 'Routers', 'routers', 'Enterprise and SMB routers for network routing and connectivity'),
+(2, 'Switches', 'switches', 'Managed and unmanaged network switches'),
+(3, 'Access Points', 'access-points', 'Wireless access points and WiFi equipment'),
+(4, 'Structured Cabling', 'structured-cabling', 'CAT5e/CAT6/CAT6A cabling kits and accessories'),
+(5, 'Firewalls', 'firewalls', 'Next-generation firewalls and UTM appliances');
+
+-- Products
+INSERT IGNORE INTO products (id, name, sku, brand, category_id, price, old_price, image, stock_status, stock_qty, moq, specs, description, features, tags, discount_percentage, featured, warranty) VALUES
+(1, 'MikroTik CCR2004-1G-12S+2XS Router', 'MK-CCR2004-1G-12S', 'MikroTik', 1, 1850000.00, 2100000.00, 'mikrotik_ccr2004_router.jpg', 'in_stock', 15, 1, 'CPU: AnnapurnaLabs AL324 4-core 1.7GHz, RAM: 4GB, Ports: 1x GbE, 12x SFP+, 2x 25GbE SFP28, OS: RouterOS v7', 'High-performance cloud core router with 25GbE uplinks, ideal for ISP and enterprise core routing.', 'Dual 25GbE SFP28, 12x SFP+, Hardware NAT, VPN acceleration, RouterOS v7', 'mikrotik,router,25gbe,sfp28,enterprise', 12, 1, '1 Year'),
+(2, 'Cisco Catalyst 2960X-24TS-L Switch', 'CISCO-2960X-24TS', 'Cisco', 2, 980000.00, NULL, 'cisco_catalyst_2960x_switch.jpg', 'in_stock', 25, 1, 'Ports: 24x GbE, 4x SFP, Switching capacity: 176 Gbps, PoE: No, Stackable: Yes', 'Managed L2 switch with SmartNet support, ideal for campus and branch access layer deployments.', 'LAN Base, FlexStack-Plus, NetFlow, QoS, Energy Efficient Ethernet', 'cisco,switch,managed,24-port,enterprise', NULL, 1, 'Limited Lifetime'),
+(3, 'Ubiquiti UniFi U6 Pro Access Point', 'UBNT-U6-PRO', 'Ubiquiti', 3, 320000.00, 380000.00, 'ubiquiti_unifi_ap_ax_access_point.jpg', 'in_stock', 50, 1, 'WiFi: 802.11ax (WiFi 6), Bands: Dual-band 2.4/5 GHz, Throughput: 5.3 Gbps, Coverage: 140m², PoE: 802.3af', 'WiFi 6 dual-band access point with 4x4 MIMO for high-density environments.', 'WiFi 6, OFDMA, MU-MIMO, BSS Coloring, Band Steering, Seamless Roaming', 'ubiquiti,wifi6,access-point,unifi,enterprise', 16, 1, '2 Years'),
+(4, 'Panduit CAT6A Structured Cabling Kit', 'PND-CAT6A-KIT', 'Panduit', 4, 450000.00, NULL, 'panduit_cat6_structured_cabling_kit.jpg', 'in_stock', 30, 1, 'Cable: CAT6A U/UTP, Length: 305m (1000ft), Connectors: RJ45, Patches: 24x 2m, Panels: 2x 24-port', 'Complete structured cabling kit with CAT6A cable, patch panels, and RJ45 connectors for office installations.', 'CAT6A 10Gbps, PoE++ rated, Flame retardant, TIA-568-C.2 compliant, Blue jacket', 'panduit,cat6a,cabling,structured,infrastructure', NULL, 0, 'Lifetime'),
+(5, 'Fortinet FortiGate 60F Next-Gen Firewall', 'FT-FGT60F', 'Fortinet', 5, 1200000.00, 1350000.00, 'fortinet_fortigate_60f.jpg', 'in_stock', 10, 1, 'Firewall: 10 Gbps, IPS: 1.4 Gbps, Interfaces: 10x GbE, VPN: 6.5 Gbps, Threat Protection: 1 Gbps', 'Compact next-generation firewall with SD-WAN and built-in wireless controller for small to medium branches.', 'FortiGuard AI, SD-WAN, IPS, SSL Inspection, Web Filtering, Application Control, Zero Trust', 'fortinet,firewall,utm,sdwan,security', 11, 1, '1 Year'),
+(6, 'Networking Equipment Bundle', 'BUNDLE-NETWK-01', 'Multi-Brand', NULL, 3500000.00, 4200000.00, 'networking_equipment_collage.jpg', 'in_stock', 5, 1, 'Includes: Router, Switch, 2x Access Points, Firewall, Cabling Kit', 'Complete enterprise networking bundle — one stop for routers, switches, APs, firewalls, and structured cabling.', 'End-to-end network stack, volume pricing, pre-configured options available', 'bundle,enterprise,networking,complete-solution', 17, 1, 'Varies by component');
+
+-- Homepage Images
+INSERT IGNORE INTO product_images (product_id, image, sort_order) VALUES
+(1, 'mikrotik_ccr2004_router.jpg', 1),
+(2, 'cisco_catalyst_2960x_switch.jpg', 2),
+(3, 'ubiquiti_unifi_ap_ax_access_point.jpg', 3),
+(4, 'panduit_cat6_structured_cabling_kit.jpg', 4),
+(5, 'fortinet_fortigate_60f.jpg', 5),
+(6, 'networking_equipment_collage.jpg', 6);
+
+# Fix existing product image paths (remove Homepage/ prefix)
+UPDATE products SET image = 'mikrotik_ccr2004_router.jpg' WHERE image = 'Homepage/mikrotik_ccr2004_router.jpg';
+UPDATE products SET image = 'cisco_catalyst_2960x_switch.jpg' WHERE image = 'Homepage/cisco_catalyst_2960x_switch.jpg';
+UPDATE products SET image = 'ubiquiti_unifi_ap_ax_access_point.jpg' WHERE image = 'Homepage/ubiquiti_unifi_ap_ax_access_point.jpg';
+UPDATE products SET image = 'panduit_cat6_structured_cabling_kit.jpg' WHERE image = 'Homepage/panduit_cat6_structured_cabling_kit.jpg';
+UPDATE products SET image = 'fortinet_fortigate_60f.jpg' WHERE image = 'Homepage/fortinet_fortigate_60f.jpg';
+UPDATE products SET image = 'networking_equipment_collage.jpg' WHERE image = 'Homepage/networking_equipment_collage.jpg';

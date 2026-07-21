@@ -381,6 +381,7 @@ if (empty($allImages)) $allImages[] = '';
       <a href="index.php">Home</a>
       <a href="catalog.php">Products</a>
       <a href="about.php">Solutions</a>
+      <a href="request-quote.php">Request Quote</a>
     </div>
     <div class="nav-actions">
       <div class="search-bar">
@@ -398,6 +399,7 @@ if (empty($allImages)) $allImages[] = '';
     <a href="index.php" onclick="toggleMenu()">Home</a>
     <a href="catalog.php" onclick="toggleMenu()">Products</a>
     <a href="about.php" onclick="toggleMenu()">Solutions</a>
+    <a href="request-quote.php" onclick="toggleMenu()">Request Quote</a>
     <a href="track.php" onclick="toggleMenu()">Track Order</a>
     <?php echo mobileAccountHtml(); ?>
     <a href="cart.php" onclick="toggleMenu()">Cart</a>

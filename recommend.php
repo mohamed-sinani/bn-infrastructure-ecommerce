@@ -107,7 +107,7 @@ footer{background:var(--navy-dark);padding:48px 48px 0;margin-top:48px}
 <div class="announcement-bar"><i class="fas fa-truck"></i> Free delivery on orders above TSh 500,000 <span>|</span> Serving all regions in Tanzania</div>
 <nav class="navbar">
   <a href="index.php" class="nav-logo"><div class="nav-logo-icon"><i class="fas fa-network-wired"></i></div><div class="nav-logo-text"><span class="brand">BN-Infrastructure</span><span class="tagline">Tanzania</span></div></a>
-  <div class="nav-links"><a href="index.php">Home</a><a href="catalog.php">Products</a><a href="recommend.php" style="color:#fff;background:rgba(255,255,255,0.1);">Advisor</a><a href="about.php">Solutions</a></div>
+  <div class="nav-links"><a href="index.php">Home</a><a href="catalog.php">Products</a><a href="recommend.php" style="color:#fff;background:rgba(255,255,255,0.1);">Advisor</a><a href="about.php">Solutions</a><a href="request-quote.php">Request Quote</a></div>
   <div class="nav-actions"><a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i><span class="cart-badge"><?php echo $itemCount; ?></span></a></div>
 </nav>
 

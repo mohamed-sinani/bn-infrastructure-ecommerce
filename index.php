@@ -240,6 +240,7 @@ $cartProductIds = array_keys(cartGetItems());
     <div class="nav-links">
       <a href="catalog.php">Products</a>
       <a href="about.php">Solutions</a>
+      <a href="request-quote.php">Request Quote</a>
       <a href="track.php">Track Order</a>
       <a href="login.php">Account</a>
     </div>
@@ -258,6 +259,7 @@ $cartProductIds = array_keys(cartGetItems());
     <button class="close-btn" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
     <a href="catalog.php" onclick="toggleMenu()">Products</a>
     <a href="about.php" onclick="toggleMenu()">Solutions</a>
+    <a href="request-quote.php" onclick="toggleMenu()">Request Quote</a>
     <a href="track.php" onclick="toggleMenu()">Track Order</a>
     <?php echo mobileAccountHtml(); ?>
     <a href="cart.php" onclick="toggleMenu()">Cart</a>
@@ -303,7 +305,7 @@ $cartProductIds = array_keys(cartGetItems());
       <p id="heroDesc">From enterprise routers to structured cabling — BN-Infrastructure supplies, configures, and supports the full stack of networking hardware across Dar es Salaam and all regions.</p>
       <div class="hero-ctas">
         <a href="catalog.php" class="btn-primary"><i class="fas fa-shopping-bag"></i> Browse Products</a>
-        <a href="about.php" class="btn-outline-white"><i class="fas fa-phone"></i> Request Quote</a>
+        <a href="request-quote.php" class="btn-outline-white"><i class="fas fa-phone"></i> Request Quote</a>
       </div>
       <?php $totalProducts = isset($totalProducts) ? $totalProducts : 0; ?>
       <div class="hero-stats">

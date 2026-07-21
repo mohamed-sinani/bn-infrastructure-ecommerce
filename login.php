@@ -425,6 +425,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="index.php">Home</a>
       <a href="catalog.php">Products</a>
       <a href="about.php">Solutions</a>
+      <a href="request-quote.php">Request Quote</a>
       <a href="track.php">Track Order</a>
       <?php echo userNavHtml(); ?>
     </div>
@@ -440,6 +441,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="index.php" onclick="toggleMenu()"><i class="fas fa-home"></i> Home</a>
     <a href="catalog.php" onclick="toggleMenu()"><i class="fas fa-box"></i> Products</a>
     <a href="about.php" onclick="toggleMenu()"><i class="fas fa-lightbulb"></i> Solutions</a>
+    <a href="request-quote.php" onclick="toggleMenu()"><i class="fas fa-file-invoice"></i> Request Quote</a>
     <a href="track.php" onclick="toggleMenu()"><i class="fas fa-truck"></i> Track Order</a>
     <?php echo mobileAccountHtml(); ?>
     <a href="cart.php" onclick="toggleMenu()"><i class="fas fa-shopping-cart"></i> Cart</a>

@@ -287,6 +287,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-primar
     <a href="index.php">Home</a>
     <a href="catalog.php">Products</a>
     <a href="about.php">Solutions</a>
+    <a href="request-quote.php">Request Quote</a>
     <a href="track.php">Track Order</a>
     <a href="cart.php">Cart</a>
   </div>
@@ -302,6 +303,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-primar
   <a href="index.php" onclick="toggleMenu()">Home</a>
   <a href="catalog.php" onclick="toggleMenu()">Products</a>
   <a href="about.php" onclick="toggleMenu()">Solutions</a>
+  <a href="request-quote.php" onclick="toggleMenu()">Request Quote</a>
   <a href="track.php" onclick="toggleMenu()">Track Order</a>
   <?php echo mobileAccountHtml(); ?>
   <a href="cart.php" onclick="toggleMenu()">Cart</a>

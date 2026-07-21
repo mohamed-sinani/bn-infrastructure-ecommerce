@@ -156,6 +156,7 @@ require_once __DIR__ . '/src/cart.php';
   <div class="nav-links">
     <a href="catalog.php">Products</a>
     <a href="about.php">Solutions</a>
+    <a href="request-quote.php">Request Quote</a>
     <a href="track.php">Track Order</a>
     <a href="login.php">Account</a>
   </div>
@@ -175,6 +176,7 @@ require_once __DIR__ . '/src/cart.php';
   <a href="index.php" onclick="toggleMenu()"><i class="fas fa-home"></i> Home</a>
   <a href="catalog.php" onclick="toggleMenu()"><i class="fas fa-box"></i> Products</a>
   <a href="about.php" onclick="toggleMenu()"><i class="fas fa-lightbulb"></i> Solutions</a>
+  <a href="request-quote.php" onclick="toggleMenu()"><i class="fas fa-file-invoice"></i> Request Quote</a>
   <a href="track.php" onclick="toggleMenu()"><i class="fas fa-truck"></i> Track Order</a>
   <a href="login.php" onclick="toggleMenu()"><i class="fas fa-user"></i> Account</a>
   <a href="cart.php" onclick="toggleMenu()"><i class="fas fa-shopping-cart"></i> Cart</a>

@@ -216,7 +216,8 @@ footer{background:var(--navy-dark);padding:64px 48px 0;border-top:1px solid rgba
     <a href="index.php">Home</a>
     <a href="catalog.php">Products</a>
     <a href="about.php">Solutions</a>
-    <a href="my-quotes.php" class="active">Quotes</a>
+    <a href="request-quote.php">Request Quote</a>
+    <a href="my-quotes.php" class="active">My Quotes</a>
     <a href="track.php">Track Order</a>
   </div>
   <div class="nav-actions">
@@ -231,7 +232,8 @@ footer{background:var(--navy-dark);padding:64px 48px 0;border-top:1px solid rgba
   <a href="index.php" onclick="toggleMenu()">Home</a>
   <a href="catalog.php" onclick="toggleMenu()">Products</a>
   <a href="about.php" onclick="toggleMenu()">Solutions</a>
-  <a href="my-quotes.php" onclick="toggleMenu()">Quotes</a>
+  <a href="request-quote.php" onclick="toggleMenu()">Request Quote</a>
+  <a href="my-quotes.php" onclick="toggleMenu()">My Quotes</a>
   <a href="track.php" onclick="toggleMenu()">Track Order</a>
   <?php echo mobileAccountHtml(); ?>
   <a href="cart.php" onclick="toggleMenu()">Cart</a>
