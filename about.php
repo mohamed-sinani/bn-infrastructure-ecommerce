@@ -97,14 +97,22 @@ require_once __DIR__ . '/src/cart.php';
     .mobile-nav .mobile-user{display:block;color:var(--orange);padding:12px 0;font-size:15px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.06)}.mobile-nav .mobile-logout{color:#fff!important;font-size:13px!important}
     @media(max-width:1200px){.navbar,.about-hero,.page-hero,.container,footer{padding-left:32px;padding-right:32px}.values-grid{grid-template-columns:repeat(2,1fr)}.about-stats{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:768px){
-      .navbar{padding:0 16px;height:60px}.nav-links{display:none}.hamburger{display:block}.btn-signin span{display:none}
-      .container{padding:24px 16px}.content-card{padding:24px}
-      .about-hero,.page-hero,footer{padding-left:20px;padding-right:20px}
-      .about-stats{grid-template-columns:1fr 1fr;gap:16px}
+      .navbar{padding:0 16px;height:56px}.nav-links{display:none}.hamburger{display:block;margin-left:auto}.btn-signin span{display:none}.search-bar{display:none}
+      .container{padding:20px 16px}.content-card{padding:20px}
+      .about-hero,.page-hero,footer{padding-left:16px;padding-right:16px}
+      .about-stats{grid-template-columns:1fr 1fr;gap:12px}
+      .stat-card{padding:16px}
+      .stat-number{font-size:24px}
       .mission-vision{grid-template-columns:1fr}
       .values-grid{grid-template-columns:1fr}
+      .team-grid{grid-template-columns:repeat(2,1fr)}
+      .team-card{padding:16px}
+    }
+    @media(max-width:480px){
+      .about-stats{grid-template-columns:1fr}
       .team-grid{grid-template-columns:1fr}
-      .search-bar{width:160px}
+      .stat-number{font-size:22px}
+      .page-hero h1{font-size:22px}
     }
     footer{background:var(--navy-dark);padding:64px 48px 0;border-top:1px solid rgba(255,255,255,0.06)}
     .footer-inner{max-width:1632px;margin:0 auto}
@@ -137,7 +145,7 @@ require_once __DIR__ . '/src/cart.php';
     .footer-bottom-links a{font-size:12px;color:#fff;text-decoration:none;transition:color .2s}
     .footer-bottom-links a:hover{color:#fff}
     @media(max-width:1200px){.footer-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:768px){.footer-grid{grid-template-columns:1fr;gap:32px}.footer-bottom{flex-direction:column;gap:12px;text-align:center}}
+    @media(max-width:768px){.footer-grid{grid-template-columns:1fr;gap:24px}.footer-bottom{flex-direction:column;gap:10px;text-align:center}footer{padding:40px 16px 0}}
   </style>
 </head>
 <body>

@@ -190,7 +190,8 @@ footer{background:var(--navy-dark);padding:64px 48px 0;border-top:1px solid rgba
 .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}.contact-strip{grid-template-columns:1fr}}
-@media(max-width:768px){.navbar{padding:0 20px;height:60px}.nav-links{display:none}.hamburger{display:block}.page-hero{padding:40px 20px}.container{padding:24px 16px 48px}.form-header,.form-body{padding:24px 20px}.form-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}footer{padding:40px 20px 0}}
+@media(max-width:768px){.navbar{padding:0 16px;height:56px}.nav-links{display:none}.hamburger{display:block;margin-left:auto}.search-bar{display:none}.page-hero{padding:32px 16px}.page-hero h1{font-size:22px}.container{padding:20px 16px 40px}.form-header,.form-body{padding:20px 16px}.form-row{grid-template-columns:1fr}.contact-strip{gap:12px}.footer-grid{grid-template-columns:1fr;gap:24px}footer{padding:40px 16px 0}.footer-bottom{flex-direction:column;gap:10px;text-align:center}}
+@media(max-width:480px){.page-hero h1{font-size:20px}.form-body{padding:16px 12px}.contact-card{padding:14px}}
 </style>
 </head>
 <body>

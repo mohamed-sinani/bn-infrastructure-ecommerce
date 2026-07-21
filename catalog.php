@@ -299,8 +299,44 @@ $cartProductIds = array_keys(cartGetItems());
     .mobile-nav .mobile-user{display:block;color:var(--orange);padding:12px 0;font-size:15px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.06)}.mobile-nav .mobile-logout{color:#fff!important;font-size:13px!important}
     .user-menu{position:relative;display:inline-block}.user-name{display:inline-flex;align-items:center;gap:6px;color:#fff;font-size:13px;font-weight:500;cursor:pointer;padding:6px 12px;border-radius:7px;transition:background .2s;white-space:nowrap}.user-name:hover{background:rgba(255,255,255,0.08)}.user-dropdown{display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.15);min-width:180px;z-index:100;overflow:hidden;margin-top:6px}.user-dropdown.show{display:block}.user-dropdown a{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#0A2540;font-size:13px;text-decoration:none;transition:background .15s}.user-dropdown a:hover{background:#F4F6F9}.user-dropdown a i{width:16px;color:#F05A22;font-size:12px}.img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#f8fafc,#e2e8f0);display:flex;align-items:center;justify-content:center;font-size:40px;color:#94a3b8}.reveal,.card-reveal,.product-reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
     @media (max-width: 1400px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 1200px) { .navbar, .announcement-bar, .page-wrapper, footer { padding-left: 32px; padding-right: 32px; } .products-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } .hfb-sort-group { display: none; } }
-    @media (max-width: 768px) { .navbar { padding: 0 16px; height: 60px; } .nav-links { display: none; } .hamburger{display:block} .page-wrapper { padding: 0 20px; } footer { padding: 40px 20px 0; } .products-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } .search-bar { width: 160px; } .horizontal-filter-bar { flex-wrap: wrap; height: auto; padding: 12px 16px; gap: 8px; } }
+    @media (max-width: 1200px) {
+      .navbar, .announcement-bar, .page-wrapper, footer { padding-left: 32px; padding-right: 32px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hfb-sort-group { display: none; }
+      .page-title { font-size: 24px; }
+    }
+    @media (max-width: 768px) {
+      .navbar { padding: 0 16px; height: 56px; }
+      .nav-links { display: none; }
+      .hamburger { display: block; margin-left: auto; }
+      .search-bar { display: none; }
+      .page-wrapper { padding: 0 16px; }
+      .page-header { padding: 20px 0 16px; }
+      .page-title { font-size: 20px; }
+      .page-subtitle { font-size: 13px; }
+      .products-grid { grid-template-columns: 1fr; gap: 14px; }
+      .product-actions { flex-direction: column; }
+      .product-actions .btn-cart, .product-actions .btn-quote { width: 100%; justify-content: center; }
+      .horizontal-filter-bar { flex-wrap: wrap; height: auto; padding: 12px 14px; gap: 8px; }
+      .hfb-label { width: 100%; margin-right: 0; }
+      .hfb-filters-group { flex-wrap: wrap; gap: 6px; }
+      .hfb-divider { display: none; }
+      .hfb-right { width: 100%; justify-content: space-between; }
+      .filter-dropdown-panel { position: fixed; top: auto; bottom: 0; left: 0; right: 0; border-radius: 16px 16px 0 0; max-height: 60vh; z-index: 600; }
+      .active-chips-row { gap: 6px; }
+      .chip { font-size: 11px; padding: 3px 8px; }
+      footer { padding: 40px 16px 0; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .pagination-bar { flex-direction: column; gap: 12px; align-items: center; }
+    }
+    @media (max-width: 480px) {
+      .page-title { font-size: 18px; }
+      .products-grid { gap: 12px; }
+      .product-body { padding: 12px; }
+      .product-price { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
